@@ -3,7 +3,7 @@ const button = document.getElementById('logbutton');
 const model = '/weights'
 // const labelurl = "../labels.json"
 const imagefolder = '/labeled_images'
-const logactive = false
+const logactive = true
 
 button.addEventListener("click", logFaceDetection);
 
@@ -37,7 +37,7 @@ function startVideo() {
 
     // Create labeled descriptors for known faces
     labels = await getLabels(imagefolder)
-    console.log(labels)
+    // console.log(labels)
     // labels = ['Trevor', 'Elias', 'Jeremiah', 'Shawn', 'Rusdy', 'Galvin', 'Jeron']
     
     const labeledDescriptors = await Promise.all(
@@ -69,7 +69,7 @@ function startVideo() {
       detected = detections.length > 0
 
       const resizedDetections = faceapi.resizeResults(detections, displaySize)
-      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+      canvas.getContext('2d', { willReadFrequently: true } ).clearRect(0, 0, canvas.width, canvas.height)
       faceapi.draw.drawDetections(canvas, resizedDetections)
       //   faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
       faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
