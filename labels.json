@@ -1,0 +1,22 @@
+[
+    {
+        "label": "Trevor",
+        "imagePath": "/labeled_images/Trevor.jpg"
+    },
+    {
+        "label": "Elias",
+        "imagePath": "/labeled_images/Elias.jpg"
+    },
+    {
+        "label": "Jeremiah",
+        "imagePath": "/labeled_images/Jeremiah.jpg" 
+    },
+    {
+        "label": "Shawn",
+        "imagePath": "/labeled_images/Shawn.jpg" 
+    },
+    {
+        "label": "Rusdy",
+        "imagePath": "/labeled_images/Rusdy.jpg" 
+    }
+]
