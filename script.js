@@ -36,8 +36,8 @@ function startVideo() {
     faceapi.matchDimensions(canvas, displaySize)
 
     // Create labeled descriptors for known faces
-    labels = []
-    getLabels(labels, imagefolder)
+    labels = await getLabels(imagefolder)
+    console.log(labels)
     // labels = ['Trevor', 'Elias', 'Jeremiah', 'Shawn', 'Rusdy', 'Galvin', 'Jeron']
     
     const labeledDescriptors = await Promise.all(
@@ -117,7 +117,7 @@ function startVideo() {
 
 async function logFaceDetection() {
   if (detected) {
-    getLabels(labels, imagefolder)
+    labels = await getLabels(imagefolder)
     console.log(facelabels);
     if (logactive) {
       for (let l = 0; l < facelabels.size; l++) {
@@ -145,8 +145,8 @@ async function logFaceDetection() {
   console.log("Face detection logged.");
 }
 
-function getLabels(array, folderPath){
-  fetch(folderPath)
+function getLabels(folderPath){
+  return fetch(folderPath)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -158,15 +158,15 @@ function getLabels(array, folderPath){
       const imageFilenames = Array.from(new DOMParser().parseFromString(html, 'text/html').querySelectorAll('a'))
                             .map(link => link.textContent)
                             // .filter(filename => /\.(jpg|jpeg|png|gif)$/i.test(filename))
-                            .map(filename => filename.slice(0, filename.lastIndexOf('.')));
-      // Modify the original 'labels' array
-      array.splice(0, array.length, ...imageFilenames);
-      console.log(imageFilenames)
+                            .map(filename => filename.slice(0, filename.lastIndexOf('.')))
+                            .slice(3);
+      return imageFilenames;
     })
     .catch(error => {
       console.error('There was a problem fetching the folder contents:', error);
     });
 }
+
 
 async function extractUnknownFace(inputImage, box){
   const regionsToExtract = [
