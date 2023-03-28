@@ -51,7 +51,7 @@ function startVideo() {
     )
 
     // Add face recognition
-    const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors, 0.4)
+    const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors, 0.5)
     facelabels = new Map()
 
     setInterval(async () => {
